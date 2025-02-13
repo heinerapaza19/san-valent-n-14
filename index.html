@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6f2;
+            overflow: hidden;
+            transition: background 1s;
+        }
+        .contenedor {
+            margin-top: 20px;
+        }
+        .boton {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .si { background-color: #ff6699; color: white; }
+        .no { background-color: #ffcc00; color: black; }
+        .oculto { display: none; }
+        h1 { transition: opacity 1s; }
+        .frases {
+            font-size: 22px;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+        .peluche {
+            width: 80%;
+            max-width: 400px;
+            display: block;
+            margin: 0 auto 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Reproductor de música (autoplay) -->
+    <audio id="musica" autoplay loop>
+        <source src="musica_san_valentin.mp3" type="audio/mpeg">
+        Tu navegador no soporta el audio.
+    </audio>
+
+    <div id="pregunta" class="contenedor">
+        <img src="capibara_sulma.png" alt="Peluche con carta SULMA" class="peluche">
+        <h1>¿Te gustaría ser mi San Valentín?</h1>
+        <button class="boton si" onclick="mostrarSorpresa()">Sí</button>
+        <button class="boton no" onclick="mostrarPorfis()">No</button>
+    </div>
+
+    <div id="porfis" class="contenedor oculto">
+        <h1>Por fis, sé mi San Valentín ❤️</h1>
+        <img src="capibara_triste.png" alt="Capibara triste" class="peluche">
+        <button class="boton si" onclick="mostrarSorpresa()">Sí</button>
+    </div>
+
+    <div id="sorpresa" class="contenedor oculto">
+        <h1>SORPRESA!</h1>
+        <div class="frases" id="frases">
+            <p>🌹 Eres lo mejor que me ha pasado.</p>
+            <p>💖 Mi vida es más hermosa contigo.</p>
+            <p>✨ Gracias por estar a mi lado siempre.</p>
+        </div>
+    </div>
+
+    <script>
+        function mostrarPorfis() {
+            document.getElementById("pregunta").style.display = "none";
+            document.getElementById("porfis").style.display = "block";
+        }
+
+        function mostrarSorpresa() {
+            document.body.style.backgroundColor = "#ffcccc";
+            document.getElementById("pregunta").style.display = "none";
+            document.getElementById("porfis").style.display = "none";
+            document.getElementById("sorpresa").style.display = "block";
+
+            setTimeout(() => {
+                document.getElementById("frases").style.opacity = "1";
+            }, 2000);
+        }
+
+        // Forzar reproducción en algunos navegadores
+        document.addEventListener("DOMContentLoaded", () => {
+            let musica = document.getElementById("musica");
+            musica.play().catch(error => {
+                console.log("El navegador bloqueó la reproducción automática.");
+            });
+        });
+    </script>
+
+</body>
+</html>
